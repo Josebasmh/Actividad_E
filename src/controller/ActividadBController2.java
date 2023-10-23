@@ -51,7 +51,7 @@ public class ActividadBController2 implements Initializable{
 				// Controlar que los parametros se insertan correctamente
 				if (txtNombre.getText().equals("")) {camposNulos = "El campo nombre es obligatorio\n";}
 				if (txtApellidos.getText().equals("")) {camposNulos += "El campo apellidos es obligatorio\n";}
-				if (txtEdad.getText().isEmpty()) {camposNulos += "El campo apellidos es obligatorio";}
+				if (txtEdad.getText().isEmpty()) {camposNulos += "El campo edad es obligatorio";}
 				if (camposNulos!="") {throw new NullPointerException();}
 				if (Integer.parseInt(txtEdad.getText().toString()) < 1) {throw new NumberFormatException();}
 				// Crear persona
