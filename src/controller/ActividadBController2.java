@@ -3,6 +3,7 @@ package controller;
 
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,19 @@ public class ActividadBController2 implements Initializable{
 
 	    @FXML
 	    private TextField txtNombre;
+	    
+	    
+	    /*
+	     * Método de inicialización.
+	     */
+	    @Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+				if (!ActividadBController.sNombre.isEmpty()) {
+					txtNombre.setText(ActividadBController.sNombre);
+					txtApellidos.setText(ActividadBController.sApellidos);
+					txtEdad.setText(ActividadBController.nEdad+"");
+				}
+		}
 
 	    /*
 	     * Metodo para cerrar la ventana auxiliar
@@ -46,6 +60,18 @@ public class ActividadBController2 implements Initializable{
 		 */
 		@FXML
 	    void guardarPersona(ActionEvent event) {
+			if (ActividadBController.sNombre.equals("")) {
+				aniadir();
+			}else {
+				modificar();
+			}
+	    }
+		
+		/*
+		 * Métodos auxiliares
+		 */
+
+		void aniadir() {
 			String camposNulos = "";
 			try {
 				// Controlar que los parametros se insertan correctamente
@@ -71,11 +97,9 @@ public class ActividadBController2 implements Initializable{
 			}catch(NumberFormatException e) {
 				ActividadBController.ventanaAlerta("E", "El valor de edad debe ser un número mayor que cero");
 			}
-	    }
-
-		@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {
-			// TODO Auto-generated method stub
-			
+		}
+		
+		void modificar() {
+			System.out.println(1);
 		}
 }

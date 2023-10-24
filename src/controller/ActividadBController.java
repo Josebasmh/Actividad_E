@@ -4,7 +4,10 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import javax.accessibility.AccessibleResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Persona;
 
@@ -58,7 +62,9 @@ public class ActividadBController implements Initializable{
 	
 	// Variables de clase
 	static ObservableList<Persona> listaPersonas;
-
+	static String tipollamada,sNombre="",sApellidos="";
+	static int nEdad=0;
+	
 	/*
 	 * Método de inicialización
 	 */
@@ -79,6 +85,9 @@ public class ActividadBController implements Initializable{
 	 */
 	@FXML
     void agregarPersona(ActionEvent event) {
+		sNombre = "";
+		sApellidos = "";
+		nEdad = 0;
 		Stage arg0 = new Stage();
 		arg0.setTitle("NUEVA PERSONA"); 
 		FlowPane aux;
@@ -88,6 +97,7 @@ public class ActividadBController implements Initializable{
 			arg0.setScene(scene);
 			arg0.setMinHeight(300);
 			arg0.setMinWidth(600);
+			arg0.initModality(Modality.APPLICATION_MODAL);
 			arg0.show();
 		} catch (IOException e) {
 			System.out.println("La ventana no se abrió correctamente.");
@@ -115,13 +125,23 @@ public class ActividadBController implements Initializable{
 
     @FXML
     void modificarPersona(ActionEvent event) {
-
+    	
+    	if (listaPersonas.contains(new Persona(sNombre, sApellidos, nEdad))) {
+    		sNombre = tblNombre.getText().toString();
+    		System.out.println(tblNombre.getText().toString());
+        	sApellidos = tblApellidos.getText().toString();
+        	nEdad = Integer.parseInt(tblEdad.getText().toString());
+    		agregarPersona(event);
+    	}else{
+    		ventanaAlerta("E", "Seleccione un registro de la tabla. Si no lo hay, añada uno.");
+    	}
     }
-	
-	
+		
 	/*
-	 * Metodo auxiliar para mostrar alertas de tipo error o confirmación
+	 * Metodos auxiliares 
 	 */
+    
+    // para mostrar alertas de tipo error o confirmación
 	static void ventanaAlerta(String tipoAlerta, String mensaje) {
 		Alert alert = null;
 		switch (tipoAlerta) {
