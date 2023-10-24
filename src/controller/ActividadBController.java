@@ -62,8 +62,7 @@ public class ActividadBController implements Initializable{
 	
 	// Variables de clase
 	static ObservableList<Persona> listaPersonas;
-	static String tipollamada,sNombre="",sApellidos="";
-	static int nEdad=0;
+	static Persona p=new Persona("", "", 0);
 	
 	/*
 	 * Método de inicialización
@@ -85,25 +84,10 @@ public class ActividadBController implements Initializable{
 	 */
 	@FXML
     void agregarPersona(ActionEvent event) {
-		sNombre = "";
-		sApellidos = "";
-		nEdad = 0;
-		Stage arg0 = new Stage();
-		arg0.setTitle("NUEVA PERSONA"); 
-		FlowPane aux;
-		try {
-			aux = (FlowPane)FXMLLoader.load(getClass().getResource("/fxml/NuevaPersona.fxml"));
-			Scene scene = new Scene(aux,600,300);
-			arg0.setScene(scene);
-			arg0.setMinHeight(300);
-			arg0.setMinWidth(600);
-			arg0.initModality(Modality.APPLICATION_MODAL);
-			arg0.show();
-		} catch (IOException e) {
-			System.out.println("La ventana no se abrió correctamente.");
-			e.printStackTrace();
-		}
-		
+		p.setNombre("");
+		p.setApellidos("");
+		p.setEdad(0);
+		crearVentanaAux();
     }
 	
 	/*
@@ -126,15 +110,15 @@ public class ActividadBController implements Initializable{
     @FXML
     void modificarPersona(ActionEvent event) {
     	
-    	if (listaPersonas.contains(new Persona(sNombre, sApellidos, nEdad))) {
-    		sNombre = tblNombre.getText().toString();
-    		System.out.println(tblNombre.getText().toString());
-        	sApellidos = tblApellidos.getText().toString();
-        	nEdad = Integer.parseInt(tblEdad.getText().toString());
-    		agregarPersona(event);
-    	}else{
+    	try {
+    		p.setNombre(tblTabla.getSelectionModel().getSelectedItem().getNombre());
+        	p.setApellidos(tblTabla.getSelectionModel().getSelectedItem().getApellidos());
+        	p.setEdad(tblTabla.getSelectionModel().getSelectedItem().getEdad());
+    		crearVentanaAux();
+    	}catch(NullPointerException e) {
     		ventanaAlerta("E", "Seleccione un registro de la tabla. Si no lo hay, añada uno.");
     	}
+    	
     }
 		
 	/*
@@ -153,5 +137,22 @@ public class ActividadBController implements Initializable{
 		}
         alert.setContentText(mensaje);
         alert.showAndWait();
+	}
+	void crearVentanaAux() {
+		Stage arg0 = new Stage();
+		arg0.setTitle("NUEVA PERSONA"); 
+		FlowPane aux;
+		try {
+			aux = (FlowPane)FXMLLoader.load(getClass().getResource("/fxml/NuevaPersona.fxml"));
+			Scene scene = new Scene(aux,600,300);
+			arg0.setScene(scene);
+			arg0.setMinHeight(300);
+			arg0.setMinWidth(600);
+			arg0.initModality(Modality.APPLICATION_MODAL);
+			arg0.show();
+		} catch (IOException e) {
+			System.out.println("La ventana no se abrió correctamente.");
+			e.printStackTrace();
+		}
 	}
 }
