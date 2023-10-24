@@ -98,11 +98,15 @@ public class ActividadBController implements Initializable{
 	
 	@FXML
 	void eliminarPersona(ActionEvent event) {
-		String sNombreEliminado = tblTabla.getSelectionModel().getSelectedItem().getNombre();
-		String sApellidosEliminado = tblTabla.getSelectionModel().getSelectedItem().getApellidos();
-		Integer nEdadEliminado = tblTabla.getSelectionModel().getSelectedItem().getEdad();
-		listaPersonas.remove(new Persona(sNombreEliminado, sApellidosEliminado, nEdadEliminado));
-		ventanaAlerta("I","Persona eliminada correctamente");
+		try {
+			String sNombreEliminado = tblTabla.getSelectionModel().getSelectedItem().getNombre();
+			String sApellidosEliminado = tblTabla.getSelectionModel().getSelectedItem().getApellidos();
+			Integer nEdadEliminado = tblTabla.getSelectionModel().getSelectedItem().getEdad();
+			listaPersonas.remove(new Persona(sNombreEliminado, sApellidosEliminado, nEdadEliminado));
+			ventanaAlerta("I","Persona eliminada correctamente");
+		}catch (NullPointerException e) {
+			ventanaAlerta("E", "Seleccione un registro de la tabla. Si no lo hay, añada uno.");
+		}		
     }
 
     @FXML
