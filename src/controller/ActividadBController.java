@@ -96,9 +96,21 @@ public class ActividadBController implements Initializable{
 		
     }
 	
+	/*
+	 * Método para eliminar registros de la tabla.
+	 * Si no hay ninguno seleccionado, se captura la 'NullPointerException' y muestra una ventana de error. 
+	 */
 	@FXML
 	void eliminarPersona(ActionEvent event) {
-		
+		try {
+			String sNombreEliminado = tblTabla.getSelectionModel().getSelectedItem().getNombre();
+			String sApellidosEliminado = tblTabla.getSelectionModel().getSelectedItem().getApellidos();
+			Integer nEdadEliminado = tblTabla.getSelectionModel().getSelectedItem().getEdad();
+			listaPersonas.remove(new Persona(sNombreEliminado, sApellidosEliminado, nEdadEliminado));
+			ventanaAlerta("I","Persona eliminada correctamente");
+		}catch (NullPointerException e) {
+			ventanaAlerta("E", "Seleccione un registro de la tabla. Si no lo hay, añada uno.");
+		}		
     }
 
     @FXML
@@ -116,8 +128,8 @@ public class ActividadBController implements Initializable{
 			case ("E"):
 				alert = new Alert(Alert.AlertType.ERROR);
 				break;
-			case ("C"):
-				alert = new Alert(Alert.AlertType.CONFIRMATION);
+			case ("I"):
+				alert = new Alert(Alert.AlertType.INFORMATION);
 		}
         alert.setContentText(mensaje);
         alert.showAndWait();
