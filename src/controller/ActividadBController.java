@@ -98,7 +98,11 @@ public class ActividadBController implements Initializable{
 	
 	@FXML
 	void eliminarPersona(ActionEvent event) {
-		
+		String sNombreEliminado = tblTabla.getSelectionModel().getSelectedItem().getNombre();
+		String sApellidosEliminado = tblTabla.getSelectionModel().getSelectedItem().getApellidos();
+		Integer nEdadEliminado = tblTabla.getSelectionModel().getSelectedItem().getEdad();
+		listaPersonas.remove(new Persona(sNombreEliminado, sApellidosEliminado, nEdadEliminado));
+		ventanaAlerta("I","Persona eliminada correctamente");
     }
 
     @FXML
@@ -116,8 +120,8 @@ public class ActividadBController implements Initializable{
 			case ("E"):
 				alert = new Alert(Alert.AlertType.ERROR);
 				break;
-			case ("C"):
-				alert = new Alert(Alert.AlertType.CONFIRMATION);
+			case ("I"):
+				alert = new Alert(Alert.AlertType.INFORMATION);
 		}
         alert.setContentText(mensaje);
         alert.showAndWait();

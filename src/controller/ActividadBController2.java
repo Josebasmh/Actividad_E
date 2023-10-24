@@ -62,7 +62,7 @@ public class ActividadBController2 implements Initializable{
 				// Insertar persona, controlando que no exista
 				if (ActividadBController.listaPersonas.contains(p)== false) {
 					ActividadBController.listaPersonas.add(p);
-					ActividadBController.ventanaAlerta("C", "Persona añadida correctamente");
+					ActividadBController.ventanaAlerta("I", "Persona añadida correctamente");
 				}else{
 					ActividadBController.ventanaAlerta("E", "La persona ya existe");
 				}	
