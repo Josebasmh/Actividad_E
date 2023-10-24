@@ -30,10 +30,10 @@ public class ActividadBController implements Initializable{
 	private Button btnAgregar;
 	
 	@FXML
-    private Button btnCancelar;
+    private Button btnEliminar;
 
     @FXML
-    private Button btnGuardar;
+    private Button btnModificar;
 	
 	@FXML
     private TableView<Persona> tblTabla;
@@ -96,6 +96,15 @@ public class ActividadBController implements Initializable{
 		
     }
 	
+	@FXML
+	void eliminarPersona(ActionEvent event) {
+		
+    }
+
+    @FXML
+    void modificarPersona(ActionEvent event) {
+
+    }
 	
 	
 	/*
