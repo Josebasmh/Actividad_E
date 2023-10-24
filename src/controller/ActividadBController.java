@@ -96,6 +96,10 @@ public class ActividadBController implements Initializable{
 		
     }
 	
+	/*
+	 * Método para eliminar registros de la tabla.
+	 * Si no hay ninguno seleccionado, se captura la 'NullPointerException' y muestra una ventana de error. 
+	 */
 	@FXML
 	void eliminarPersona(ActionEvent event) {
 		try {
