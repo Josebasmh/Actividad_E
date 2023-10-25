@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -62,12 +63,13 @@ public class ActividadBController2 implements Initializable{
 		 * Se controla que los campos no pueden ser nulos y que el campo edad sea un número mayor que 1. 
 		 */
 		@FXML
-	    void guardarPersona(ActionEvent event) {
+	    void guardarPersona(ActionEvent event) {			
 			if (ActividadBController.p.getNombre().equals("")) {
 				aniadir();
 			}else {
 				modificar();
 			}
+			cancelarVentana(event);
 	    }
 		
 		/*
@@ -93,7 +95,7 @@ public class ActividadBController2 implements Initializable{
 				if (ActividadBController.listaPersonas.contains(p)== false) {
 					ActividadBController.listaPersonas.add(p);
 					ActividadBController.ventanaAlerta("I", "Persona añadida correctamente");
-					eliminarValores();
+					
 				}else{
 					ActividadBController.ventanaAlerta("E", "La persona ya existe");
 				}	
@@ -111,7 +113,6 @@ public class ActividadBController2 implements Initializable{
 	    		Persona pAux = new Persona(txtNombre.getText(), txtApellidos.getText(), Integer.parseInt(txtEdad.getText()));
 	    		if (!ActividadBController.listaPersonas.contains(pAux)) {
 	        		// Modificar persona
-	    			
 	    			ActividadBController.listaPersonas.remove(ActividadBController.p);
 	    			ActividadBController.listaPersonas.add(pAux);
 	    			ActividadBController.ventanaAlerta("I", "Persona modificada correctamente");
@@ -124,10 +125,13 @@ public class ActividadBController2 implements Initializable{
 	    		ActividadBController.ventanaAlerta("E", camposNulos);
 	    	}
 		}
+		
+		// Vacia los editText  
 		void eliminarValores() {
 			txtNombre.clear();
 			txtApellidos.clear();
 			txtEdad.clear();
 		}
+		
 		
 }
