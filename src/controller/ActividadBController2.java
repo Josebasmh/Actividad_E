@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -68,6 +69,7 @@ public class ActividadBController2 implements Initializable{
 			}else {
 				modificar();
 			}
+			cancelarVentana(event);
 	    }
 		
 		/*
@@ -111,7 +113,6 @@ public class ActividadBController2 implements Initializable{
 	    		Persona pAux = new Persona(txtNombre.getText(), txtApellidos.getText(), Integer.parseInt(txtEdad.getText()));
 	    		if (!ActividadBController.listaPersonas.contains(pAux)) {
 	        		// Modificar persona
-	    			
 	    			ActividadBController.listaPersonas.remove(ActividadBController.p);
 	    			ActividadBController.listaPersonas.add(pAux);
 	    			ActividadBController.ventanaAlerta("I", "Persona modificada correctamente");
@@ -124,10 +125,10 @@ public class ActividadBController2 implements Initializable{
 	    		ActividadBController.ventanaAlerta("E", camposNulos);
 	    	}
 		}
+		// Vacia los editText  
 		void eliminarValores() {
 			txtNombre.clear();
 			txtApellidos.clear();
 			txtEdad.clear();
 		}
-		
 }
