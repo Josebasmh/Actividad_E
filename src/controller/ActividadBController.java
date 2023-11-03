@@ -64,8 +64,9 @@ public class ActividadBController implements Initializable{
 	static ObservableList<Persona> listaPersonas;
 	static Persona p=new Persona("", "", 0);
 	
-	/*
-	 * Método de inicialización
+	/**
+	 * Al iniciar la ventana, se enlazan las columnas con un arrayList que guarda las
+	 * personas registradas.
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -79,8 +80,9 @@ public class ActividadBController implements Initializable{
 		tblTabla.setItems(listaPersonas);		
 	}
 		
-	/*
+	/**
 	 * Método para abrir la ventana 'VentanaNuePer'
+	 * @param event
 	 */
 	@FXML
     void agregarPersona(ActionEvent event) {
@@ -90,9 +92,10 @@ public class ActividadBController implements Initializable{
 		crearVentanaAux();
     }
 	
-	/*
+	/**
 	 * Método para eliminar registros de la tabla.
 	 * Si no hay ninguno seleccionado, se captura la 'NullPointerException' y muestra una ventana de error. 
+	 * @param event
 	 */
 	@FXML
 	void eliminarPersona(ActionEvent event) {
@@ -121,11 +124,11 @@ public class ActividadBController implements Initializable{
     	
     }
 		
-	/*
-	 * Metodos auxiliares 
+	/**
+	 * Método auxiliar para mostrar alertas de tipo error o confirmación.
+	 * @param tipoAlerta
+	 * @param mensaje
 	 */
-    
-    // para mostrar alertas de tipo error o confirmación
 	static void ventanaAlerta(String tipoAlerta, String mensaje) {
 		Alert alert = null;
 		switch (tipoAlerta) {
@@ -138,6 +141,10 @@ public class ActividadBController implements Initializable{
         alert.setContentText(mensaje);
         alert.showAndWait();
 	}
+	
+	/**
+	 * Método auxiliar para crear la ventana 'NuevaPersona'.
+	 */
 	void crearVentanaAux() {
 		Stage arg0 = new Stage();
 		arg0.setTitle("NUEVA PERSONA"); 
